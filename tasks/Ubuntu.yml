@@ -1,0 +1,19 @@
+---
+# tasks file for rabbitmq (Ubuntu specific)
+
+- name: Add RabbitMQ APT repository key
+  apt_key: >
+    url=https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+    state=present
+  tags: rabbitmq
+
+- name: Add RabbitMQ APT repository
+  apt_repository: >
+    repo='deb http://www.rabbitmq.com/debian/ testing main'
+    state=present
+  tags: rabbitmq
+
+- name: Install RabbitMQ packages
+  apt: name={{ item }} state=present update_cache=yes
+  with_items: rabbitmq_packages
+  tags: rabbitmq

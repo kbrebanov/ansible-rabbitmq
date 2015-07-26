@@ -1,0 +1,5 @@
+---
+# vars file for rabbitmq (Ubuntu specific)
+
+rabbitmq_packages:
+  - rabbitmq-server={{ rabbitmq_version }}-*

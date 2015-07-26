@@ -1,2 +1,4 @@
 ---
 # vars file for rabbitmq
+
+rabbitmq_service_name: rabbitmq-server

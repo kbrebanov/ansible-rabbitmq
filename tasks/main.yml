@@ -1,2 +1,18 @@
 ---
 # tasks file for rabbitmq
+
+- name: Include distribution specific variables
+  include_vars: "{{ ansible_distribution }}.yml"
+  tags: rabbitmq
+
+- include: CentOS.yml
+  when: ansible_distribution == "CentOS"
+  tags: rabbitmq
+
+- include: Ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+  tags: rabbitmq
+
+- name: Ensure RabbitMQ service is started and enabled on boot
+  service: name={{ rabbitmq_service_name }} state=started enabled=yes
+  tags: rabbitmq

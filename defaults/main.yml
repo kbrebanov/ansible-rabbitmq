@@ -1,2 +1,4 @@
 ---
 # defaults file for rabbitmq
+
+rabbitmq_version: 3.5.4
