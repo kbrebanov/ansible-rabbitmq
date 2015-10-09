@@ -1,6 +1,8 @@
 rabbitmq
 ========
 
+[![Ansible Role](https://img.shields.io/ansible/role/5474.svg)](https://galaxy.ansible.com/list#/roles/5474)
+
 Installs RabbitMQ
 
 Requirements
