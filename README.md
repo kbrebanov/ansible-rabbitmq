@@ -3,7 +3,7 @@ rabbitmq
 
 [![Build Status](https://travis-ci.org/kbrebanov/ansible-rabbitmq.svg?branch=master)](https://travis-ci.org/kbrebanov/ansible-rabbitmq)
 
-Installs RabbitMQ
+Installs and configures RabbitMQ.
 
 Requirements
 ------------

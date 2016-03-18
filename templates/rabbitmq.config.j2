@@ -1,0 +1,222 @@
+%% {{ ansible_managed }}
+[
+{% if rabbitmq_ssl_listeners and rabbitmq_ssl_options.versions %}
+  {ssl, [
+    {versions, [
+{% for version in rabbitmq_ssl_options.versions %}
+{% if not loop.last %}
+      '{{ version }}',
+{% else %}
+      '{{ version }}'
+{% endif %}
+{% endfor %}
+    ]}
+  ]},
+
+{% endif %}
+  {rabbit,
+    [
+      {tcp_listeners, [
+{% for tcp_listener in rabbitmq_tcp_listeners %}
+{% if not loop.last %}
+        {"{{ tcp_listener.address }}", {{ tcp_listener.port }}},
+{% else %}
+        {"{{ tcp_listener.address }}", {{ tcp_listener.port }}}
+{% endif %}
+{% endfor %}
+      ]},
+      {num_tcp_acceptors, {{ rabbitmq_num_tcp_acceptors }}},
+      {handshake_timeout, {{ rabbitmq_handshake_timeout }}},
+{% if rabbitmq_ssl_listeners %}
+      {ssl_listeners, [
+{% for ssl_listener in rabbitmq_ssl_listeners %}
+{% if not loop.last %}
+        {"{{ ssl_listener.address }}", {{ ssl_listener.port }}},
+{% else %}
+        {"{{ ssl_listener.address }}", {{ ssl_listener.port }}}
+{% endif %}
+{% endfor %}
+      ]},
+{% endif %}
+      {num_ssl_acceptors, {{ rabbitmq_num_ssl_acceptors }}},
+      {log_levels, [
+{% for log_level in rabbitmq_log_levels %}
+{% if not loop.last %}
+        {{'{'}}{{ log_level.log }}, {{ log_level.level }}},
+{% else %}
+        {{'{'}}{{ log_level.log }}, {{ log_level.level }}}
+{% endif %}
+{% endfor %}
+      ]},
+{% if rabbitmq_ssl_cert_login_from %}
+      {ssl_cert_login_from, {{ rabbitmq_ssl_cert_login_from }}},
+{% endif %}
+{% if rabbitmq_reverse_dns_lookups %}
+      {reverse_dns_lookups, true},
+{% else %}
+      {reverse_dns_lookups, false},
+{% endif %}
+{% if rabbitmq_loopback_users %}
+      {loopback_users, [
+{% for loopback_user in rabbitmq_loopback_users %}
+{% if not loop.last %}
+        <<"{{ loopback_user }}">>,
+{% else %}
+        <<"{{ loopback_user }}">>
+{% endif %}
+{% endfor %}
+      ]},
+{% else %}
+      {loopback_users, []},
+{% endif %}
+{% if rabbitmq_ssl_listeners %}
+      {ssl_options, [
+        {cacertfile, "{{ rabbitmq_ssl_options.cacertfile }}"},
+        {certfile, "{{ rabbitmq_ssl_options.certfile }}"},
+        {keyfile, "{{ rabbitmq_ssl_options.keyfile }}"},
+{% if rabbitmq_ssl_options.password %}
+        {password, "{{ rabbitmq_ssl_options.password }}"}
+{% endif %}
+{% if rabbitmq_ssl_options.versions %}
+        {versions, [
+{% for version in rabbitmq_ssl_options.versions %}
+{% if not loop.last %}
+          '{{ version }}',
+{% else %}
+          '{{ version }}'
+{% endif %}
+{% endfor %}
+        ]},
+{% endif %}
+{% if rabbitmq_ssl_options.ciphers %}
+        {ciphers, [
+{% for cipher in rabbitmq_ssl_options.ciphers %}
+{% if not loop.last %}
+          {{'{'}}{{ cipher.key_exchange }},{{ cipher.bulk_cipher }},{{ cipher.mac }}},
+{% else %}
+          {{'{'}}{{ cipher.key_exchange }},{{ cipher.bulk_cipher }},{{ cipher.mac }}}
+{% endif %}
+{% endfor %}
+        ]},
+{% endif %}
+        {verify, {{ rabbitmq_ssl_options.verify }}},
+{% if rabbitmq_ssl_options.fail_if_no_peer_cert %}
+        {fail_if_no_peer_cert, true}
+{% else %}
+        {fail_if_no_peer_cert, false}
+{% endif %}
+      ]},
+{% endif %}
+      {auth_mechanisms, [
+{% for auth_mechanism in rabbitmq_auth_mechanisms %}
+{% if not loop.last %}
+        '{{ auth_mechanism }}',
+{% else %}
+        '{{ auth_mechanism }}'
+{% endif %}
+{% endfor %}
+      ]},
+      {auth_backends, [
+{% for auth_backend in rabbitmq_auth_backends %}
+{% if not loop.last %}
+        {{ auth_backend }},
+{% else %}
+        {{ auth_backend }}
+{% endif %}
+{% endfor %}
+      ]},
+      {ssl_handshake_timeout, {{ rabbitmq_ssl_handshake_timeout }}},
+      {password_hashing_module, {{ rabbitmq_password_hashing_module }}},
+      {default_vhost, <<"{{ rabbitmq_default_vhost }}">>},
+      {default_user, <<"{{ rabbitmq_default_user }}">>},
+      {default_pass, <<"{{ rabbitmq_default_pass }}">>},
+      {default_permissions, [
+        <<"{{ rabbitmq_default_permissions.configure }}">>,
+        <<"{{ rabbitmq_default_permissions.write }}">>,
+        <<"{{ rabbitmq_default_permissions.read }}">>
+      ]},
+      {default_user_tags, [
+{% for tag in rabbitmq_default_user_tags %}
+{% if not loop.last %}
+        {{ tag }},
+{% else %}
+        {{ tag }}
+{% endif %}
+{% endfor %}
+      ]},
+      {heartbeat, {{ rabbitmq_heartbeat }}},
+      {frame_max, {{ rabbitmq_frame_max }}},
+      {initial_frame_max, {{ rabbitmq_initial_frame_max }}},
+      {channel_max, {{ rabbitmq_channel_max }}},
+      {tcp_listen_options, [
+        {backlog, {{ rabbitmq_tcp_listen_options.backlog }}},
+{% if rabbitmq_tcp_listen_options.nodelay %}
+        {nodelay, true},
+{% else %}
+        {nodelay, false},
+{% endif %}
+{% if rabbitmq_tcp_listen_options.exit_on_close %}
+        {exit_on_close, true}
+{% else %}
+        {exit_on_close, false}
+{% endif %}
+      ]},
+      {vm_memory_high_watermark, {{ rabbitmq_vm_memory_high_watermark }}},
+      {vm_memory_high_watermark_paging_ration, {{ rabbitmq_vm_memory_high_watermark_paging_ratio }}},
+      {memory_monitor_interval, {{ rabbitmq_memory_monitor_interval }}},
+      {disk_free_limit, {{ rabbitmq_disk_free_limit }}},
+{% if rabbitmq_server_properties %}
+      {server_properties, [
+{% for server_property in rabbitmq_server_properties %}
+{% if not loop.last %}
+        {{ server_property }},
+{% else %}
+        {{ server_property }}
+{% endif %}
+{% endfor %}
+      ]},
+{% endif %}
+      {cluster_partition_handling, {{ rabbitmq_cluster_partition_handling }}},
+      {cluster_nodes, {[
+{% for cluster_node in rabbitmq_cluster_nodes.nodes %}
+{% if not loop.last %}
+        '{{ cluster_node }}',
+{% else %}
+        '{{ cluster_node }}'
+{% endif %}
+{% endfor %}
+      ], {{ rabbitmq_cluster_nodes.type }}{{'}}'}},
+      {cluster_keepalive_interval, {{ rabbitmq_cluster_keepalive_interval }}},
+      {collect_statistics, {{ rabbitmq_collect_statistics }}},
+      {collect_statistics_interval, {{ rabbitmq_collect_statistics_interval }}},
+{% if rabbitmq_hipe_compile %}
+      {hipe_compile, true},
+{% else %}
+      {hipe_compile, false},
+{% endif %}
+      {mnesia_table_loading_timeout, {{ rabbitmq_mnesia_table_loading_timeout }}},
+      {queue_index_embed_msgs_below, {{ rabbitmq_queue_index_embed_msgs_below }}},
+      {queue_master_locator, <<"{{ rabbitmq_queue_master_locator }}">>},
+      {queue_index_max_journal_entries, {{ rabbitmq_queue_index_max_journal_entries }}},
+      {msg_store_file_size_limit, {{ rabbitmq_msg_store_file_size_limit }}},
+      {backing_queue_module, {{ rabbitmq_backing_queue_module }}},
+      {msg_store_index_module, {{ rabbitmq_msg_store_index_module }}},
+{% if rabbitmq_trace_vhosts %}
+      {trace_vhosts, [
+{% for trace_vhost in rabbitmq_trace_vhosts %}
+{% if not loop.last %}
+        {{ trace_vhost }},
+{% else %}
+        {{ trace_vhost }}
+{% endif %}
+{% endfor %}
+      ]},
+{% endif %}
+      {delegate_count, {{ rabbitmq_delegate_count }}}
+    ]},
+
+  {kernel,
+    [
+      {net_ticktime, {{ rabbitmq_kernel_net_ticktime }}}
+    ]}
+].

@@ -3,3 +3,74 @@
 
 rabbitmq_version: 3.6.1
 rabbitmq_sha256sum: 0728fbdb14ec62712c6f931a7d91648cafbc6c30d8d4da790832e784b4d2e956
+
+rabbitmq_auth_backends:
+  - rabbit_auth_backend_internal
+rabbitmq_auth_mechanisms:
+  - PLAIN
+  - AMQPLAIN
+rabbitmq_backing_queue_module: rabbit_variable_queue
+rabbitmq_channel_max: 128
+rabbitmq_cluster_nodes:
+  nodes: []
+  type: disc
+rabbitmq_cluster_keepalive_interval: 10000
+rabbitmq_cluster_partition_handling: ignore
+rabbitmq_collect_statistics: none
+rabbitmq_collect_statistics_interval: 5000
+rabbitmq_default_pass: guest
+rabbitmq_default_permissions:
+  configure: .*
+  write: .*
+  read: .*
+rabbitmq_default_user: guest
+rabbitmq_default_user_tags:
+  - administrator
+rabbitmq_default_vhost: /
+rabbitmq_delegate_count: 16
+rabbitmq_disk_free_limit: 50000000
+rabbitmq_frame_max: 131072
+rabbitmq_handshake_timeout: 10000
+rabbitmq_heartbeat: 600
+rabbitmq_hipe_compile: false
+rabbitmq_initial_frame_max: 4096
+rabbitmq_log_levels:
+  - log: connection
+    level: info
+  - log: channel
+    level: info
+rabbitmq_loopback_users:
+  - guest
+rabbitmq_memory_monitor_interval: 2500
+rabbitmq_mnesia_table_loading_timeout: 30000
+rabbitmq_msg_store_file_size_limit: 16777216
+rabbitmq_msg_store_index_module: rabbit_msg_store_ets_index
+rabbitmq_num_ssl_acceptors: 1
+rabbitmq_num_tcp_acceptors: 10
+rabbitmq_password_hashing_module: rabbit_password_hashing_sha256
+rabbitmq_queue_index_embed_msgs_below: 4096
+rabbitmq_queue_index_max_journal_entries: 65536
+rabbitmq_queue_master_locator: client-local
+rabbitmq_reverse_dns_lookups: false
+rabbitmq_server_properties: []
+rabbitmq_ssl_cert_login_from: ''
+rabbitmq_ssl_handshake_timeout: 5000
+rabbitmq_ssl_listeners: []
+rabbitmq_ssl_options:
+  cacertfile: "/path/to/testca/cacert.pem"
+  certfile: "/path/to/server/cert.pem"
+  keyfile: "/path/to/server/key.pem"
+  verify: verify_peer
+  fail_if_no_peer_cert: false
+rabbitmq_tcp_listeners:
+  - address: 0.0.0.0
+    port: 5672
+rabbitmq_tcp_listen_options:
+  backlog: 128
+  nodelay: true
+  exit_on_close: false
+rabbitmq_trace_vhosts: []
+rabbitmq_vm_memory_high_watermark: 0.4
+rabbitmq_vm_memory_high_watermark_paging_ratio: 0.5
+
+rabbitmq_kernel_net_ticktime: 60
