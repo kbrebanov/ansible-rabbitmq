@@ -8,7 +8,7 @@ Installs RabbitMQ
 Requirements
 ------------
 
-None
+This role requires Ansible 1.9 or higher.
 
 Role Variables
 --------------
