@@ -1,7 +1,7 @@
 rabbitmq
 ========
 
-[![Ansible Role](https://img.shields.io/ansible/role/5474.svg)](https://galaxy.ansible.com/list#/roles/5474)
+[![Build Status](https://travis-ci.org/kbrebanov/ansible-rabbitmq.svg?branch=master)](https://travis-ci.org/kbrebanov/ansible-rabbitmq)
 
 Installs RabbitMQ
 
