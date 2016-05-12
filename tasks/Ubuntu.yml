@@ -4,9 +4,9 @@
 - name: Download RabbitMQ package
   become: yes
   get_url:
-    url: "{{ rabbitmq_url }}"
+    url: "{{ rabbitmq_url }}/rabbitmq-server_{{ rabbitmq_version }}-1_all.deb"
     dest: "{{ rabbitmq_download_dir }}/rabbitmq-server-{{ rabbitmq_version }}.deb"
-    sha256sum: "{{ rabbitmq_sha256sum }}"
+    sha256sum: "{{ rabbitmq_sha256sum_deb }}"
   tags:
     - rabbitmq
 
