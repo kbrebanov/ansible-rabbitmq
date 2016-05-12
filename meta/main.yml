@@ -10,10 +10,11 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - trusty
-    - name: EL
+    - name: CentOS
       versions:
         - 6
         - 7
   galaxy_tags:
     - clustering
     - system
+dependencies: []
