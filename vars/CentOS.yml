@@ -1,2 +1,5 @@
 ---
 # vars file for rabbitmq (CentOS specific)
+esl_erlang_compat_package_url: "https://github.com/jasonmcintosh/esl-erlang-compat/releases/download/1.1.1"
+esl_erlang_compat_package: "esl-erlang-compat-18.1-1.noarch.rpm"
+esl_erlang_compat_package_sha256sum: "37ea20030e97da140f3a82bf2aa8cbd73760ae80c3b8cde09654489bb3d0b662"

@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Kevin Brebanov
+  author: Kevin Brebanov / Zsolt Kulcsar
   description: Installs RabbitMQ
   company:
   license: BSD
@@ -10,8 +10,11 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - trusty
+    - name: EL
+      versions:
+        - 6
+        - 7
   galaxy_tags:
     - clustering
     - system
-dependencies:
-  - kbrebanov.erlang
+dependencies: []

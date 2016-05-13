@@ -13,10 +13,11 @@ This role requires Ansible 1.9 or higher.
 Role Variables
 --------------
 
-| Name               | Default                                                          | Description                    |
-|--------------------|------------------------------------------------------------------|--------------------------------|
-| rabbitmq_version   | 3.6.1                                                            | Version of RabbitMQ to install |
-| rabbitmq_sha256sum | 0728fbdb14ec62712c6f931a7d91648cafbc6c30d8d4da790832e784b4d2e956 | SHA 256 sum of package         |
+| Name                   | Default                                                          | Description                    |
+|------------------------|------------------------------------------------------------------|--------------------------------|
+| rabbitmq_version       | 3.6.1                                                            | Version of RabbitMQ to install |
+| rabbitmq_sha256sum_deb | 0728fbdb14ec62712c6f931a7d91648cafbc6c30d8d4da790832e784b4d2e956 | SHA 256 sum of package         |
+| rabbitmq_sha256sum_rpm | 0728fbdb14ec62712c6f931a7d91648cafbc6c30d8d4da790832e784b4d2e956 | SHA 256 sum of package         |
 
 Dependencies
 ------------

@@ -1,2 +1,37 @@
 ---
 # tasks file for rabbitmq (CentOS specific)
+
+# Need to have the compat package installed
+- name: Download ESL Erlang compat package
+  become: yes
+  get_url:
+    url: "{{ esl_erlang_compat_package_url }}/{{ esl_erlang_compat_package }}"
+    dest: "/var/{{ esl_erlang_compat_package }}"
+    sha256sum: "{{ esl_erlang_compat_package_sha256sum }}"
+  tags:
+    - erlang
+
+- name: Install ESL Erlang compat package
+  become: yes
+  yum:
+    name: "/var/{{ esl_erlang_compat_package }}"
+    state: "present"
+  tags:
+    - erlang
+
+- name: Download RabbitMQ package
+  become: yes
+  get_url:
+    url: "{{ rabbitmq_url }}/rabbitmq-server-{{ rabbitmq_version }}-1.noarch.rpm"
+    dest: "{{ rabbitmq_download_dir }}/rabbitmq-server-{{ rabbitmq_version }}.rpm"
+    sha256sum: "{{ rabbitmq_sha256sum_rpm }}"
+  tags:
+    - rabbitmq
+
+- name: Install RabbitMQ package
+  become: yes
+  yum:
+    name: "{{ rabbitmq_download_dir }}/rabbitmq-server-{{ rabbitmq_version }}.rpm"
+    state: "present"
+  tags:
+    - rabbitmq
