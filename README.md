@@ -14,9 +14,9 @@ Role Variables
 --------------
 
 | Name               | Default                                                          | Description                    |
-|--------------------|------------------------------------------------------------------|--------------------------------|
-| rabbitmq_version   | 3.6.1                                                            | Version of RabbitMQ to install |
-| rabbitmq_sha256sum | 0728fbdb14ec62712c6f931a7d91648cafbc6c30d8d4da790832e784b4d2e956 | SHA 256 sum of package         |
+|:-------------------|:-----------------------------------------------------------------|:-------------------------------|
+| rabbitmq_version   | 3.6.2                                                            | Version of RabbitMQ to install |
+| rabbitmq_sha256sum | 87217c0b135c6705f1d9ac2fcdbc355eeb3b0f53562c4f430e79861b0b7057b8 | SHA 256 sum of package         |
 
 Dependencies
 ------------

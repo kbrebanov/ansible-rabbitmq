@@ -1,8 +1,8 @@
 ---
 # defaults file for rabbitmq
 
-rabbitmq_version: 3.6.1
-rabbitmq_sha256sum: 0728fbdb14ec62712c6f931a7d91648cafbc6c30d8d4da790832e784b4d2e956
+rabbitmq_version: 3.6.2
+rabbitmq_sha256sum: 87217c0b135c6705f1d9ac2fcdbc355eeb3b0f53562c4f430e79861b0b7057b8
 
 rabbitmq_auth_backends:
   - rabbit_auth_backend_internal
