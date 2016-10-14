@@ -27,7 +27,7 @@ Example Playbook
 ----------------
 
 Install RabbitMQ
-```
+```yaml
 - hosts: all
   roles:
     - kbrebanov.rabbitmq
