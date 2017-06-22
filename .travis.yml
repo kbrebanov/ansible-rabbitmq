@@ -4,9 +4,9 @@ sudo: required
 language: generic
 
 env:
-  global:
+  #global:
     # https://github.com/travis-ci/travis-ci/issues/6461#issuecomment-239577307
-    DOCKER_VERSION: "1.9.1-0~trusty"
+    #DOCKER_VERSION: "1.9.1-0~trusty"
   matrix:
     - distribution: ubuntu
       version: 14.04
@@ -30,9 +30,9 @@ services:
 
 before_install:
   # Downgrade to specific version of Docker engine
-  - sudo apt-get update
-  - sudo apt-get remove docker-engine -yq
-  - sudo apt-get install docker-engine=$DOCKER_VERSION -yq --no-install-suggests --no-install-recommends --force-yes -o Dpkg::Options::="--force-confnew"
+  #- sudo apt-get update
+  #- sudo apt-get remove docker-engine -yq
+  #- sudo apt-get install docker-engine=$DOCKER_VERSION -yq --no-install-suggests --no-install-recommends --force-yes -o Dpkg::Options::="--force-confnew"
 
   # Build container
   - docker pull ${distribution}:${version}
